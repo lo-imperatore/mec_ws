@@ -25,7 +25,7 @@ mec_ws/
 **Git submodule**:
 
 * **Actuator-dynamics-identification**
-  👉 
+  👉 https://github.com/CentroEPiaggio/Actuator-dynamics-identification
 
 After cloning this repository, make sure to initialize and update submodules:
 
