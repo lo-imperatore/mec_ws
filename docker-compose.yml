@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  ros2-dev:
+    build: .
+    container_name: ros2-humble-dev
+    network_mode: host   # important for ROS 2 multi-machine
+    environment:
+      # ROS 2 multi-machine config
+      - ROS_DOMAIN_ID=0              # choose a domain; must match Raspberry
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+      - ROS_LOCALHOST_ONLY=0
+
+      # Display for GUI apps (PlotJuggler, rqt, etc.)
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+
+    volumes:
+      # X11 socket for GUI
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+
+      # Your SSH keys so you can ssh to Raspberry from inside the container
+      - ${HOME}/.ssh:/home/ros/.ssh:ro
+
+      # Your ROS2 source code
+      - ./src:/home/ros/colcon_ws/src
+
+      # Optional: persistent bash history/config
+      - ros_home:/home/ros
+
+    # Give access to GPU if you have one and want RViz etc. to be smoother (optional)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - capabilities: ["gpu"]
+
+    # Start with an interactive shell
+    tty: true
+    stdin_open: true
+
+volumes:
+  ros_home:
