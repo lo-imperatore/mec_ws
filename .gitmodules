@@ -1,0 +1,3 @@
+[submodule "src/Actuator-dynamics-identification"]
+	path = src/Actuator-dynamics-identification
+	url = https://github.com/CentroEPiaggio/Actuator-dynamics-identification.git
