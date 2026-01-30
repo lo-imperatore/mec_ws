@@ -1,2 +1,5 @@
 # ROS bag files
 src/bag/
+src/mulinex_description/
+src/mulinex_ignition/
+src/Pi3Hat_Controllers/

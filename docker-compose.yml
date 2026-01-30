@@ -5,6 +5,7 @@ services:
     build: .
     container_name: ros2-humble-dev
     network_mode: host   # important for ROS 2 multi-machine
+    privileged: true  # needed for some hardware access
     environment:
       # ROS 2 multi-machine config
       - ROS_DOMAIN_ID=0              # choose a domain; must match Raspberry
@@ -27,7 +28,7 @@ services:
 
       # Optional: persistent bash history/config
       - ros_home:/home/ros
-
+      - /dev/input:/dev/input
     # Give access to GPU if you have one and want RViz etc. to be smoother (optional)
     # deploy:
     #   resources:
